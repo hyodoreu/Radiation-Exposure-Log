@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>방사선 피폭 일지</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <style>
+        @font-face {
+        font-family: 'DOSGothic';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;}
+        html, body {font-family: 'DOSGothic', sans-serif; font-size:2vw; scroll-behavior: smooth;}
+        body,header,h1,p,div,ul,li,nav{margin:0; padding:0;}
+        body{background-color:black;} 
+        header {
+        }
+        p{word-break:keep-all;}
+        .black{background-color:black;}
+        .gif;}
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-item {
+            position: fixed; mix-blend-mode:difference; z-index:1000;
+        }
+
+        .nav-item a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color:black; 
+        background-color: #FF0000;
+        width: 60px; 
+        }
+
+
+        .subnav-list {
+            display: none;
+            position: fixed;
+            right: 0;
+            top:0;
+        }
+        .subnav-item {
+            display: inline-block;
+        }
+
+        .subnav-item a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #FF0000;;
+        width: auto;
+        background-color: black;
+        }
+        header img {
+        width: 100%;
+        height: auto;}
+        .main {
+        max-width: 100%;
+        padding-top: 50px;
+        padding-bottom:30px;}
+        .main img {
+            width: 85%;
+            height: auto; margin-left:100px;}
+        .rad{color:#EFFF00; letter-spacing:20px; font-size: 3vw;}
+        .center{text-align:center;}
+
+        .news {
+            max-width: 100%;
+            padding-top: 50px;
+            padding-bottom: 200px;
+            text-align: center;}
+            @media screen and (min-width: 1800px) {
+        .main {
+            max-width: 1800px;}
+        .news {
+            max-width: 1800px;}
+        }
+        .back{background-image: url("back.png");}
+        .tele{height:auto; width:85%; padding-bottom:200px;}
+        .ticker{position: absolute;overflow: hidden;}
+        #ticker1{
+            left: 0px;top:25rem;
+            width:100%;height: 2.5rem;
+            font-size: 1.5rem; line-height:2.6rem;
+            background:#EFFF00;color: black;-webkit-text-stroke: 0.7px black;
+        }
+        .rel{position:relative;}
+        .tvtext{width:1200px;
+        border:  medium  dashed #EFFF00; color:#EFFF00; margin:auto; background-color:black;}
+        .textwidth{width: 1000px; margin:auto; }
+        .pad{padding-top: 50px;
+        padding-bottom:50px; line-height:4vw; font-size:2.5vw;
+        -webkit-text-stroke: 0.5px #EFFF00;
+        text-stroke: 0.5px #EFFF00; }
+        .black{background-color:black;}
+        
+        .tvtext p:hover { color:#FF0000; -webkit-text-stroke: 0.5px #FF0000; 
+        text-stroke: 0.5px #FF0000; }
+
+        .pad2{padding-top:100px;}
+        @keyframes blink {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        .pad3{padding-top: 50px;
+        padding-bottom:80px; line-height:4vw; font-size:2.5vw;
+        -webkit-text-stroke: 0.5px #EFFF00; 
+        text-stroke: 0.5px #EFFF00;}
+        .auto{margin:auto; width: 1000px; position:relative; text-align: center; margin-bottom: 200px; box-sizing: border-box; background-color:black;}
+        .icon1{width:11%; position:absolute; top:-60px; left:500px; animation: blink 1s infinite;}
+        .icon2{width:11%; position:absolute; bottom:400px; left:-180px; animation: blink 2s infinite;}
+        .icon3{width:11%; position:absolute; top:450px; left:-80px; animation: blink 0.5s infinite;}
+        .icon4{width:11%; position:absolute; top:700px; right:400px; animation: blink 3s infinite;}
+        .icon5{width:11%; position:absolute; bottom:100px; right:-140px; animation: blink 0.7s infinite;}
+        .h{width:700px; height: 80px; border-radius: 100px; background-color:#FF0000; color:black; line-height: 2.4rem; margin-top:100px; -webkit-text-stroke: 0.9px black;}
+        .ar{width:10%; padding-top:40px;}
+        .day{ margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;}
+        .container {
+        display: flex;
+        height: 100%;
+        width: 100%;
+          }
+
+          .left {
+            width:49%;
+            background-color:black; 
+          }
+
+          .right {
+            width: 50%;
+            background-color:#FF0000; 
+            overflow-y: auto;
+          }
+        .imgslide{
+        width: 100%; height:70px;
+        overflow: hidden; background-color:black;
+        border: medium dashed #FF0000;}
+        
+        .moving-image {
+            position: relative;
+            animation: slide-left 12s linear infinite; 
+        }
+        .moving-image2 {
+            position: relative;
+            animation: slide-left 12s linear infinite; 
+             padding-left:500px;
+        }
+        .moving-image3 {
+            position: relative;
+            animation: slide-left 12s linear infinite; 
+            padding-left:500px;
+        }
+        
+        @keyframes slide-left {
+            0% {
+                left: 100%; 
+            }
+            100% {
+                left: -100%; 
+            }
+        }
+        .cursor{cursor:url('cursor.png'), auto;}
+        .cursor-y{cursor:url('cursor-y.png'), auto;}
+        .dayday{width:10%;}.zoom-container {
+            position: relative;
+        }
+
+        .main-image {
+            display: block;
+            width:75%; padding-left:65px;
+        }
+
+        .magnifier
+        {position: absolute;
+        border: 0px solid #000;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 150px;
+        height: 150px;
+        box-shadow: 0 0 10px rgba(0, 0, 0,0.5);
+        background-repeat: no-repeat;
+        pointer-events: none;
+        transform: translate(-20%, -20%);}
+        .number{display:inline-block; position:absolute; width:10px; text-align:left; padding-left: 16px; top:5px; font-size:1.2rem; padding-bottom: 10px;}
+        .text{width:600px; text-align:left; left:65px; display:inline-block; position: relative; top:50px; -webkit-text-stroke: 1px black; padding-bottom: 70px; line-height: 1.4rem;
+        }
+        footer{padding-top:300px; padding-bottom:10px; color:#FF0000; margin:auto; text-align: center;}
+        footer p{padding-bottom:20px;}
+        footer p:hover{color:#EFFF00;}
+        .day .text img:hover{mix-blend-mode: difference;}
+
+    </style>
+    
+
+</head>
+<body class="cursor-y">
+    <header class="black cursor">
+        <div>
+            <nav>
+                <ul class="nav-list">
+                     <li class="nav-item">
+                         <a href="#" onclick="toggleSubnav(event)">Day</a>
+                        <ul class="subnav-list">
+                            <li class="subnav-item"><a href="#1">+1</a></li>
+                            <li class="subnav-item"><a href="#6">+6</a></li>
+                            <li class="subnav-item"><a href="#7">+7</a></li>
+                            <li class="subnav-item"><a href="#11">+11</a></li>
+                            <li class="subnav-item"><a href="#15">+15</a></li>
+                            <li class="subnav-item"><a href="#18">+18</a></li>
+                            <li class="subnav-item"><a href="#25">+25</a></li>
+                            <li class="subnav-item"><a href="#27">+27</a></li>
+                            <li class="subnav-item"><a href="#50">+50</a></li>
+                            <li class="subnav-item"><a href="#59">+59</a></li>
+                            <li class="subnav-item"><a href="#65">+65</a></li>
+                            <li class="subnav-item"><a href="#81">+81</a></li>
+                            <li class="subnav-item"><a href="#83">+83</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="cursor">
+        <div class="main">
+            <img src="3.gif">
+            <p class="rad center">Radiation Exposure - Log</p>
+        </div>
+    </section>
+    <section class="back cursor">
+        <div class="news rel">
+
+            <div class="tv">
+                <img src="2.gif" class="tele" style="width:100%;">
+                <div id="ticker1" class="ticker" data-speed="2" data-gap="480">
+                    <p><span>&nbsp;<긴급속보> 김정은의 핵발사로 인해 한국에 불법 체류 중인 H씨, 방사선에 피폭... 우려와 긴장감 고조</span></p>
+                </div>
+            </div>
+            <div class="tvtext center rel">
+                <div class="textwidth rel"> 
+                    <img src="warning.png" class="icon1">
+                    <img src="warning.png" class="icon2">
+                    <img src="warning.png" class="icon3">
+                    <img src="warning.png" class="icon4">
+                    <img src="warning.png" class="icon5">
+                    <p class="pad pad2">금일 북한의 국가지도자인 김정은의 핵발사로 인해 한국에 불법 체류 중인 독일인 H씨가 방사선에 피폭된 사건이 발생하였습니다. 이로 인해 국내외에서는 우려와 대응에 대한 논의가 진행되고 있습니다.</p>
+                    <p class="pad">H씨는 해당 지역 지하에 비밀 기지를 만들려던 찰나, 핵발사로 인한 방사선 오염에 노출되었다고 보고되었습니다. 현재 H씨의 건강 상태와 신속한 응급조치가 중요한 과제로 대두되고 있습니다.</p>
+                    <p class="pad">한국 정부는 즉각적인 대응 조치를 취하였으며, H씨의 신속한 구조와 의료 지원을 위해 현장에 출동하였습니다. 이에 따라 주변 지역의 주민들은 안전 대책을 강화하고, 필요한 방사선 검사 및 대응을 위한 시설을 마련하는 등의 조치를 취하고 있습니다.</p>
+                    <p class="pad3">국제사회는 이번 사건으로 인해 방사선 피폭 위험이 발생한 주민들에 대한 우려를 표명하고 있습니다. 지역 안전을 보장하기 위해 국제 기구와 주요 국가들은 한국 정부와 긴밀한 협력을 통해 대응 방안을 모색하고 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    <div class="h auto">
+         <p>다음은 H씨의 방사선 치료 기록입니다.</p>
+          <img src="arrow.png" class="ar" style="width:6%;">
+    </div>
+    <div class="imgslide">
+        <img src="1.png" alt="Your Image" class="moving-image dayday">
+        <img src="1.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="1.png" alt="Your Image" class="moving-image3 dayday"> 
+    </div>
+    <section class="day" id="1">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="1p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier" style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:530px;">❷</p>
+                <p class="text">관계자들이 방호복을 쓴 채 H씨를 병원에 이송한다. <img src="1-1.gif" style="width:100%; padding-left:0px; padding-bottom: 10px;"> 눈에 띄는 신체 변화는 안 보인다.</p>
+
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide">
+        <img src="6.png" alt="Your Image" class="moving-image dayday">
+        <img src="6.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="6.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day" id="6">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="6p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier" style="display: none";></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:363px;">❷</p>
+                <p class="number" style="top:740px;">❸</p>
+                <p class="number" style="top:1450px;">❹</p>
+                <p class="text">피부가 화상 입은 것처럼 온통 빨갛게 변했다. <img src="6-1.jpg" style="width:90%; padding-bottom: 40px; padding-top:20px;"> 백혈구의 숫자가 10분의 1까지 감소했다. <img src="6-2.jpg" style="width:90%; padding-bottom: 40px; padding-top:20px;"> 치료 방법은 백혈구를 만드는 세포를 이식하는 것이다. 이식을 하기 위해 백혈구의 형이 일치하는 사람을 찾았다. 혈액성분을 분리하는 장치를 사용해 즉시 체혈을 실시해 백혈구를 만드는 세포를 분리해냈다. <img src="6-3.gif" style="width:90%; padding-bottom: 30px; padding-top:20px;"> H씨의 염색체는 완전히 망가졌다. <img src="6-4.gif" style="width:90%;  padding-top:10px;"> </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="7">
+        <img src="7.png" alt="Your Image" class="moving-image dayday">
+        <img src="7.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="7.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="7p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:585px;">❷</p>
+                <p class="number" style="top:1310px;">❸</p>
+                <p class="text">백혈구를 만드는 세포를 H씨에게 이식하는 작업을 진행했다. 앞으로의 상황은 이식한 세포가 몸 속에서 백혈구를 만들어 낼 수 있느냐 없느냐에 달려있다. <img src="7-1.jpg" style="width:90%; padding-bottom: 40px; padding-top:30px;"> 건강할 때의 피부 세포는 왕성하게 분열해서 새로운 것으로 바뀌지만 H씨는 새로운 세포를 만들어내지 못하게 되어 치료용 테이프를 붙이면 붙인 곳이 테이프에 그대로 들러 붙어서 테이프랑 같이 떼어내졌다. <img src="7-2.gif" style="width:90%; padding-bottom: 40px; padding-top:30px;"> 폐에 물이 차 호흡 곤란이 왔다. 의료진들이 H씨가 호흡을 원할하게 할 수 있도록 인공호흡기를 설치하는 것을 검토하게 된다. 이 말은 곧 말을 못하게 된다는 것과 같다. <img src="7-3.jpg" style="width:70%; padding-bottom: 30px; padding-top:20px;"></p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="11">
+        <img src="11.png" alt="Your Image" class="moving-image dayday">
+        <img src="11.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="11.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="11p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="text">인공 호흡기 삽관을 진행했다. <img src="11-1.gif" style="width:90%; padding-bottom: 40px; padding-top:30px;"></p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="15">
+        <img src="15.png" alt="Your Image" class="moving-image dayday">
+        <img src="15.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="15.png" alt="Your Image" class="moving-image3 dayday">
+
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="15p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="text">소화 장애가 급격히 진행되었다. <img src="15-1.gif" style="width:100%; padding-bottom: 40px; padding-top:30px; margin-left:-50px;" ></p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="18">
+        <img src="18.png" alt="Your Image" class="moving-image dayday">
+        <img src="18.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="18.png" alt="Your Image" class="moving-image3 dayday">
+
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="18p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="text">이식된 백혈구 세포가 자리를 잡은 것을 확인 했다. 백혈구가 원활하게 증가해서 건강할 때와 같은 수의 백혈구로 회복하게 되었다.(빛나는 두개의 점 : 이식된 세포)<img src="18-1.gif" style="width:100%; padding-bottom: 40px; padding-top:10px;" ></p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="25">
+        <img src="25.png" alt="Your Image" class="moving-image dayday">
+        <img src="25.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="25.png" alt="Your Image" class="moving-image3 dayday">
+
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="25p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="text">이식된 염색체(이식세포)에 상처가 발견 되었다. <img src="25-1.gif" style="width:100%; padding-bottom: 40px; padding-top:30px;"><img src="25-2.jpg" style="width:100%; padding-bottom: 40px; padding-top:10px;">
+                <img src="25-3.jpg" style="width:100%; padding-bottom: 40px; padding-top:10px;">
+                <img src="25-4.jpg" style="width:100%; padding-bottom: 40px; padding-top:10px;">
+                </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="27">
+        <img src="27.png" alt="Your Image" class="moving-image dayday">
+        <img src="27.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="27.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="27p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:550px;">❷</p>
+                <p class="text">증상의 악화는 혈액과 피부에만 머물지 않게 되었다. 장의 점막이 죽어 하얗게 변색 되어 매달려 있다. <img src="27-1.gif" style="width:100%; padding-bottom: 40px; padding-top:30px; padding-left:-5px;"> 대량 설사가 시작되었다. 설사의 양이 날마다 증가해 하루 3L를 넘겼다.
+                </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="50">
+        <img src="50.png" alt="Your Image" class="moving-image dayday">
+        <img src="50.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="50.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="50p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:660px;">❷</p>
+                <p class="number" style="top:1290px;">❸</p>
+                <p class="number" style="top:1990px;">❹</p>
+                <p class="text">장속에서 출혈이 시작되었다. 점막이 벗겨진 곳에서 혈액이 넘치는 상황이 발생했고 점막 소실로 인해 위장 출혈도 심각해졌다. <img src="50-1.gif" style="width:100%; padding-bottom: 40px; padding-top:10px;">몸의 순환을 원활하게 하기 위해 50도로 꺽일 수 있는 중증환자용 침대로 이송되었다.
+                <img src="50-2.gif" style="width:100%; padding-bottom: 20px; padding-top:30px;">
+                피부가 벗겨진 부분에서 혈액과 체내수분이 빠져나가고 있다. 몸의 대부분을 붕대로 감싸지 않으면 안되는 상황이다. 피부, 장에서 하루 10L 정도의 수분이 상실되고 있다.
+                <img src="50-3.gif" style="width:100%; padding-bottom: 20px; padding-top:30px;">
+                H씨의 각막이 점점 말라가는게 보였다.<img src="50-4.jpg" style="width:100%; padding-bottom: 20px; padding-top:40px;" >
+
+                </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="59">
+        <img src="59.png" alt="Your Image" class="moving-image dayday">
+        <img src="59.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="59.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="59p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:620px;">❷</p>
+                <p class="number" style="top:1240px;">❸</p>
+                <p class="text">대량의 출혈과 수혈로 인해 심박수는 1분에 120 이상, 마라톤을 뛰고 있을 때와 같은 정도로 심장에 부담이 가기 시작하였다. <img src="59-1.gif" style="width:80%; padding-bottom: 40px; padding-top:10px; padding-left: 100px;">심정지가 3번 발생한다. 분 단위로 심장 마사지와 심장소생술을 실시했다.
+                <img src="59-2.gif" style="width:100%; padding-bottom: 40px; padding-top:30px;">
+                심장이 일시적으로 멈춤으로 인해 뇌, 신장 등 장기 전체에 심각한 영향을 주어 동공 반사가 되지 않았고 혼수 상태에 빠지게 된다.
+                <img src="59-3.gif" style="width:100%; padding-bottom: 20px; padding-top:30px;">
+               </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="65">
+       <img src="65.png" alt="Your Image" class="moving-image dayday">
+       <img src="65.png" alt="Your Image" class="moving-image2 dayday">
+       <img src="65.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="65p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:620px;">❷</p>
+                <p class="text">면역 세포와 대식 세포에 이상이 발생해 정상적인 백혈구와 세포를 공격하게 되었다. <img src="65-1.gif" style="width:100%; padding-bottom: 40px; padding-top:10px;">백혈구가 점점 줄어들어 그 수가 제로에 가까워 졌다.
+                <img src="65-2.gif" style="width:100%; padding-bottom: 40px; padding-top:30px;">
+               </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="81">
+        <img src="81.png" alt="Your Image" class="moving-image dayday">
+        <img src="81.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="81.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="81p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+            
+                <p class="text">H씨의 상황이 진전될 가능성이 손톱만큼도 보이지 않자 DNR심장소생 포기 통보가 내려졌다. (DNR : 심장이 멈춰도 소생조치를 하지 않는 결정)
+               </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <div class="imgslide" id="83">
+        <img src="83.png" alt="Your Image" class="moving-image dayday">
+        <img src="83.png" alt="Your Image" class="moving-image2 dayday">
+        <img src="83.png" alt="Your Image" class="moving-image3 dayday">
+    </div>
+    <section class="day">
+            <div class="container">
+                <div class="left zoom-container">
+                    <img src="83p.png" class="threed main-image">
+                        <div class="magnifier" id="magnifier"style="display: none;"></div>
+                     <!-- 왼쪽 내용 -->
+
+                </div>
+                <div class="right rel">
+                <p class="number">❶</p>
+                <p class="number" style="top:493px;">❷</p>
+                <p class="text">4차 심정지로 H씨는 사망했다.<img src="83-1.jpg" style="width:100%; padding-bottom: 40px; padding-top:30px;">놀라웠던 점은 심근(심장근육)을 제외한 근육들은 전부 파괴되었다. 방사선에 피폭 되어도 심장은 계속 살아 있었다는 것이다.<img src="fin.gif" style="width:100%; padding-bottom: 40px; padding-top:10px;">
+               </p>
+                <!-- 오른쪽 내용 (스크롤 가능) -->
+
+                </div>
+
+            </div>
+    </section>
+    <footer>
+        <p>Kim Hyo Won (@HYODOREU_U)</p>
+        <p>영상 출처 : https://www.youtube.com/watch?v=FHAJF4agCQA&t=2364s </p>
+    </footer>
+
+
+<script>
+    function toggleSubnav(event) {
+    event.preventDefault();
+
+    const subnavList = event.target.parentElement.querySelector('.subnav-list');
+    const allSubnavLists = document.querySelectorAll('.subnav-list');
+
+    allSubnavLists.forEach((element) => {
+        if (element !== subnavList) {
+        element.style.display = 'none';
+        }
+    });
+
+    if (subnavList.style.display === 'none' || subnavList.style.display === '') {
+        subnavList.style.display = 'block';
+    } else {
+        subnavList.style.display = 'none';
+    }
+}
+    </script>
+    <script type="text/javascript">
+        bhTicker("ticker",2);
+
+    function bhTicker(cl,speed) {
+        let t = document.getElementsByClassName(cl);
+        let ta = []; let ts=[]; let tg=[]; let tw=[];
+        let container,mover,text,textWidth;
+
+        for(let i=0; i<t.length; i++){
+                container = t[i];
+                mover = container.getElementsByTagName("p").item(0);
+                text = mover.getElementsByTagName("span").item(0);
+
+                // set
+                mover.style.position = "absolute";
+                mover.style.margin = "0 0 0 0";
+                mover.style.left = "0px";
+                mover.leftPosition = 0;
+                mover.style.width = text.childNodes.item(0).length + "em";        // stretch width
+                textWidth = text.offsetWidth;
+
+                let speed2 = t[i].dataset.speed;
+                if (textWidth > container.offsetWidth) {
+                        if(speed2 == 1){speed2 = 2};
+                        mover.style.width = textWidth * speed2 + "px";
+                        
+                        for(let k=0;k<speed2;k++){
+                                mover.innerHTML += mover.innerHTML;        
+                        }
+                }
+
+                tw.push(textWidth);
+                tg.push(t[i].dataset.gap);
+                ts.push(t[i].dataset.speed);
+                ta.push(mover);
+        }
+
+        let tickerAction = function() {
+                for(let j=0;j<ta.length;j++){
+                        let speed = parseInt(ts[j]);
+                        let gap = parseInt(tg[j]);
+                        let tw2 = tw[j];
+
+                        if (ta[j].leftPosition * -speed > tw2*speed) {
+                                ta[j].leftPosition = -speed;
+                        } else {
+                                ta[j].leftPosition -= speed;
+                        }
+
+                        ta[j].style.left = (-gap + ta[j].leftPosition) + "px";
+                }
+                window.requestAnimationFrame(tickerAction);
+        };
+        tickerAction();
+}
+
+</script>
+<script>
+const magnifiers = document.getElementsByClassName("magnifier");
+
+for (let i = 0; i < magnifiers.length; i++) {
+  const magnifier = magnifiers[i];
+  const mainImage = document.querySelectorAll(".main-image")[i];
+  
+  mainImage.addEventListener("mouseenter", () => {
+    magnifier.style.display = "block";
+    magnifier.style.backgroundImage = `url(${mainImage.src})`;
+    magnifier.style.backgroundSize = `${mainImage.offsetWidth * 2}px ${mainImage.offsetHeight * 2}px`;
+  });
+
+  mainImage.parentElement.addEventListener("mouseleave", () => {
+    magnifier.style.display = "none";
+  });
+
+  mainImage.addEventListener("mousemove", (event) => {
+    moveMagnifier(event, magnifier);
+  });
+}
+
+function moveMagnifier(event, magnifier) {
+  const { offsetX, offsetY } = event;
+  const magnifierSize = magnifier.offsetWidth / 2;
+  const bgPosX = offsetX * -2;
+  const bgPosY = offsetY * -2;
+  magnifier.style.left = `${offsetX}px`;
+  magnifier.style.top = `${offsetY}px`;
+  magnifier.style.backgroundPosition = `${bgPosX}px ${bgPosY}px`;
+}
+</script>
+</body>
+</html>
